@@ -5,4 +5,4 @@ A derivative of Flappy Bird controlled by level of input sound. The library used
 ### How to install
 <i>Will be updated as project evolves.</i>
 ### Testing Strategy
-The testing strategy used for this project will be unit testing.
+The testing framework used for this project will be JUnit5.
