@@ -1,4 +1,5 @@
 .root {
     -fx-background-image: url("../pictures/cave_bg.png");
     -fx-background-size: cover;
+    -fx-background-repeat: repeat;
 }
