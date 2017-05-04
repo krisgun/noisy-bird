@@ -12,8 +12,8 @@ import javafx.stage.Stage;
 public class NoisyBirdApp extends Application{
 
     /**
-     * Settings for stage
-     * @return stage with settings you want
+     * Settings for scene
+     * @return scene with settings you want
      */
     protected Scene makeScene(){
         StackPane layout = new StackPane();
