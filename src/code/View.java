@@ -20,6 +20,7 @@ public class View {
         primaryStage.setTitle("Noisy Bird");
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true); //Maximize window
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
