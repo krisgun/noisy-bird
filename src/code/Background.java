@@ -10,7 +10,7 @@ public class Background extends Pane {
 
     ImageView backgroundImageViewPrimary;
     ImageView backgroundImageViewSecondary;
-    String backgroundPath = "/assets/pictures/cave_bg.png";
+    String backgroundPath = "../assets/pictures/cave_bg.png";
     double SCREEN_WIDTH;
     double SCREEN_HEIGHT;
 
