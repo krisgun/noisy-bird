@@ -15,8 +15,8 @@ public class View {
         root = new Group();
     }
 
-    public void createView(Stage primaryStage, double SCREEN_HEIGHT, double SCREEN_WIDTH) {
-        Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
+    public void createView(Stage primaryStage) {
+        Scene scene = new Scene(root, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
         primaryStage.setTitle("Noisy Bird");
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true); //Maximize window

@@ -12,15 +12,18 @@ public class Game {
     private AnimationTimer gameLoop;
     private View view;
     private Background background;
+    private Ground ground;
     private double backgroundScrollSpeed = 0.3;
-    private double SCREEN_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
-    private double SCREEN_HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
+    public static double SCREEN_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
+    public static double SCREEN_HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
 
     public Game(Stage primaryStage) {
         view = new View();
-        view.createView(primaryStage, SCREEN_HEIGHT, SCREEN_WIDTH);
         background = new Background(SCREEN_HEIGHT, SCREEN_WIDTH);
+        ground = new Ground();
+        view.createView(primaryStage);
         view.addNode(background);
+        view.addNode(ground);
         startGameLoop();
     }
 
