@@ -14,7 +14,7 @@ public class Game {
     private Background background;
     private Ground ground;
     private double backgroundScrollSpeed = 0.4;
-    private double groundScrollSpeed = 3;
+    private double groundScrollSpeed = 5;
     public static double SCREEN_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
     public static double SCREEN_HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
 
