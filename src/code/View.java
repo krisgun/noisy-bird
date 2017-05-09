@@ -9,14 +9,15 @@ import javafx.stage.Stage;
  * Created by Kristoffer on 2017-05-08.
  */
 public class View {
-    Group root; //Layer of nodes
+    private Group root; //Layer of nodes
+    protected Scene scene;
 
     public View() {
         root = new Group();
     }
 
     public void createView(Stage primaryStage) {
-        Scene scene = new Scene(root, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
+        scene = new Scene(root, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
         primaryStage.setTitle("Noisy Bird");
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true); //Maximize window
