@@ -10,8 +10,7 @@ import javafx.scene.layout.Pane;
  * Created by Kristoffer on 2017-05-08.
  */
 public class Bird {
-    protected ImageView bird;
-    protected Image birdImage;
+    protected Image bird;
     protected double startingX;
     protected double startingY;
     protected double currentY;
@@ -21,16 +20,14 @@ public class Bird {
     private double maxSpeedY;
 
     public Bird(){
-        birdImage = new Image("/assets/pictures/bird.png", 0, 120, true,true,true);
-        bird = new ImageView(birdImage);
+        bird = new Image("/assets/pictures/bird.png", 0, 120, true,true,true);
 
         startingY = Game.SCREEN_HEIGHT/6;
-        startingX = Game.SCREEN_HEIGHT/6;
+        startingX = Game.SCREEN_WIDTH/4;
         currentY = startingY;
         gravity = 1;
         falling = true;
         maxSpeedY = 15;
-
     }
 
     public void fall(){
