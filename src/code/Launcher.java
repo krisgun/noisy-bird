@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by Kristoffer on 2017-05-08.
+ * Created by Kristoffer G. & Timas L. on 2017-05-08.
  */
 public class Launcher extends Application {
 
@@ -13,6 +13,11 @@ public class Launcher extends Application {
         launch(args);
     }
 
+    /**
+     * Method used by JavaFX to start the program.
+     * @param primaryStage Stage used by JavaFX
+     * @throws Exception if there is any type of exception it will be thrown and the stack trace will be printed.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {

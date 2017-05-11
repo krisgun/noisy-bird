@@ -9,7 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
- * Created by Kristoffer on 2017-05-08.
+ * Created by Kristoffer G. & Timas L. on 2017-05-08.
  */
 public class View {
     private Group root; //Layer of nodes
@@ -28,19 +28,36 @@ public class View {
         primaryStage.show();
     }
 
+    /**
+     * Adds a node to the root.
+     * @param node node to be added
+     */
     public void addNode(Node node) {
         root.getChildren().add(node);
     }
 
+    /**
+     * Removes a node from the root.
+     * @param node node to be removed
+     */
     public void removeNode(Node node) {
         root.getChildren().remove(node);
     }
 
+    /**
+     * Checks whether a node is already added to the root.
+     * @param node node to be checked
+     * @return true if node exists, false if it does not
+     */
     public boolean isExistingNode(Node node) {
         return root.getChildren().contains(node);
     }
 
-    public ImageView GameOverlay() {
+    /**
+     * Creates an overlay display prompting the user to start playing.
+     * @return the overlay as an ImageView object
+     */
+    public ImageView GameReadyOverlay() {
         ImageView overlay = new ImageView("/assets/pictures/get_ready.png");
         overlay.setFitWidth(Game.SCREEN_WIDTH/4);
         overlay.setFitHeight(Game.SCREEN_HEIGHT/10);

@@ -9,13 +9,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 
 
 /**
- * Created by Kristoffer on 2017-05-08.
+ * Created by Kristoffer G. and Timas L. on 2017-05-08.
  */
 
 public class Game {
@@ -34,18 +33,26 @@ public class Game {
     ArrayList<String> input;
     private RotateTransition rotateTransition;
 
-
+    /**
+     * Method which starts the game.
+     * @param primaryStage Stage object JavaFX
+     */
     public Game(Stage primaryStage) {
         init(primaryStage);
+        manageKeyEvents();
         startGameLoop();
     }
 
+    /**
+     * Initializes all objects on screen.
+     * @param primaryStage Stage object for JavaFX
+     */
     public void init(Stage primaryStage) {
         view = new View();
         canvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
         gc = canvas.getGraphicsContext2D();
         input = new ArrayList<String>();
-        overlay = view.GameOverlay();
+        overlay = view.GameReadyOverlay();
 
         background = new Background(SCREEN_HEIGHT, SCREEN_WIDTH);
         ground = new Ground();
@@ -55,10 +62,11 @@ public class Game {
         view.addNode(background);
         view.addNode(ground);
         view.addNode(canvas);
-
-        manageKeyEvents();
     }
 
+    /**
+     * This method contains all nodes which needs updating. Everything inside handle is called every frame.
+     */
     private void startGameLoop() {
         gameLoop = new AnimationTimer() {
             boolean isPlaying = false;
@@ -75,6 +83,10 @@ public class Game {
         gameLoop.start();
     }
 
+    /**
+     * Depending on the value of isPlaying, it will either display the intro overlay or it will remove it.
+     * @param isPlaying false before the player starts the game, true when the player is playing.
+     */
     private void gameOverlay(boolean isPlaying) {
         if(!isPlaying && !view.isExistingNode(overlay)) {
             view.addNode(overlay);
@@ -84,6 +96,9 @@ public class Game {
         }
     }
 
+    /**
+     * Adds key presses to the input ArrayList when the key is pressed down and removes them when the key is released.
+     */
     private void manageKeyEvents() {
         view.scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override

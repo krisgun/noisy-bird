@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
- * Created by Kristoffer on 2017-05-08.
+ * Created by Kristoffer G. & Timas L. on 2017-05-08.
  */
 public class Background extends Pane {
 
@@ -15,6 +15,12 @@ public class Background extends Pane {
     double SCREEN_WIDTH;
     double SCREEN_HEIGHT;
 
+    /**
+     * Creates two background ImageViews placed next to each other. One is on-screen and the other is off-screen.
+     * These are set to the width and height of the monitor.
+     * @param SCREEN_HEIGHT height of monitor
+     * @param SCREEN_WIDTH height of monitor
+     */
     public Background(double SCREEN_HEIGHT, double SCREEN_WIDTH) {
         backgroundImageViewPrimary = new ImageView(Launcher.class.getResource(backgroundPath).toExternalForm());
         backgroundImageViewSecondary = new ImageView(Launcher.class.getResource(backgroundPath).toExternalForm());
@@ -31,6 +37,10 @@ public class Background extends Pane {
         this.SCREEN_WIDTH = SCREEN_WIDTH;
     }
 
+    /**
+     * Calculates how much each background ImageView should be moved on the x-axis and if the image is out of bounds, its position is reset.
+     * @param scrollSpeed the value of how much the background should move on the x-axis per frame
+     */
     public void scrollBackground(double scrollSpeed) {
         double x1 = backgroundImageViewPrimary.getLayoutX() - scrollSpeed;
         double x2 = backgroundImageViewSecondary.getLayoutX() - scrollSpeed;

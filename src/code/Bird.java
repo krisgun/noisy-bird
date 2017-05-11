@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 /**
- * Created by Kristoffer on 2017-05-08.
+ * Created by Kristoffer G. & Timas L. on 2017-05-08.
  */
 public class Bird {
     private Image bird;
@@ -32,6 +32,9 @@ public class Bird {
         maxSpeedY = 10;
     }
 
+    /**
+     * Method for how the character falls
+     */
     public void fall() {
         if (falling) {
             speedY += gravity;
@@ -42,6 +45,9 @@ public class Bird {
         }
     }
 
+    /**
+     * Method for how the character moves up on the y-axis.
+     */
     public void jump() {
         if (!falling) {
             speedY -= gravity;
@@ -51,7 +57,14 @@ public class Bird {
             currentY -= speedY;
         }
     }
-  
+
+    /**
+     * Controls how the bird is drawn on the canvas and if it is colliding with the ground.
+     * COLLISION CHECKING IN THIS METHOD SHOULD BE WRITTEN SEPARATELY ELSEWHERE.
+     * @param gc GraphicsContext object from a canvas
+     * @param input ArrayList containing key presses
+     * @param isPlaying boolean determining whether the game is playing or paused.
+     */
     public void updateBird(GraphicsContext gc, ArrayList input, boolean isPlaying) {
         gc.clearRect(0,0,Game.SCREEN_WIDTH,Game.SCREEN_HEIGHT);
 
