@@ -5,21 +5,22 @@ import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 
 
 /**
- * Created by Kristoffer on 2017-05-08.
+ * Created by Kristoffer G. and Timas L. on 2017-05-08.
  */
 
 public class Game {
     private AnimationTimer gameLoop;
     private View view;
+    private ImageView overlay;
     private Background background;
     private Ground ground;
     private Bird bird;
@@ -32,14 +33,27 @@ public class Game {
     ArrayList<String> input;
     private RotateTransition rotateTransition;
 
-
+    /**
+     * Method which starts the game.
+     * @param primaryStage Stage object JavaFX
+     */
     public Game(Stage primaryStage) {
         init(primaryStage);
+        manageKeyEvents();
         startGameLoop();
     }
 
+    /**
+     * Initializes all objects on screen.
+     * @param primaryStage Stage object for JavaFX
+     */
     public void init(Stage primaryStage) {
         view = new View();
+        canvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
+        gc = canvas.getGraphicsContext2D();
+        input = new ArrayList<String>();
+        overlay = view.GameReadyOverlay();
+
         background = new Background(SCREEN_HEIGHT, SCREEN_WIDTH);
         ground = new Ground();
         bird = new Bird();
@@ -47,15 +61,45 @@ public class Game {
         view.createView(primaryStage);
         view.addNode(background);
         view.addNode(ground);
-
-        canvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
-
-        gc = canvas.getGraphicsContext2D();
-
         view.addNode(canvas);
+    }
 
-        input = new ArrayList<String>();
+    /**
+     * This method contains all nodes which needs updating. Everything inside handle is called every frame.
+     */
+    private void startGameLoop() {
+        gameLoop = new AnimationTimer() {
+            boolean isPlaying = false;
+            @Override
+            public void handle(long currentNanoTime) {
+                if(input.contains("SPACE")) isPlaying = true;
 
+                background.scrollBackground(backgroundScrollSpeed);
+                ground.scrollGround(groundScrollSpeed);
+                bird.updateBird(gc, input, isPlaying);
+                gameOverlay(isPlaying);
+            }
+        };
+        gameLoop.start();
+    }
+
+    /**
+     * Depending on the value of isPlaying, it will either display the intro overlay or it will remove it.
+     * @param isPlaying false before the player starts the game, true when the player is playing.
+     */
+    private void gameOverlay(boolean isPlaying) {
+        if(!isPlaying && !view.isExistingNode(overlay)) {
+            view.addNode(overlay);
+        }
+        else if(isPlaying && view.isExistingNode(overlay)){
+            view.removeNode(overlay);
+        }
+    }
+
+    /**
+     * Adds key presses to the input ArrayList when the key is pressed down and removes them when the key is released.
+     */
+    private void manageKeyEvents() {
         view.scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -74,19 +118,5 @@ public class Game {
                 input.remove(code);
             }
         });
-    }
-
-    private void startGameLoop() {
-
-        gameLoop = new AnimationTimer() {
-            @Override
-            public void handle(long currentNanoTime) {
-              
-                background.scrollBackground(backgroundScrollSpeed);
-                ground.scrollGround(groundScrollSpeed);
-                bird.updateBird(gc, input);            
-            }
-        };
-        gameLoop.start();
     }
 }
