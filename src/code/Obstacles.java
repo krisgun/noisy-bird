@@ -9,8 +9,8 @@ import javafx.scene.image.Image;
 public class Obstacles {
     private Image upperObstacle;
     private Image lowerObstacle;
-    private String upperObstaclePath = "/assets/pictures/obstacle_ground.png";
-    private String lowerObstaclePath = "/assets/pictures/obstacle_roof.png";
+    private String upperObstaclePath = "/assets/pictures/obstacle_roof.png";
+    private String lowerObstaclePath = "/assets/pictures/obstacle_ground.png";
     private double upperY;
     private double lowerY;
     private double currentX1;
