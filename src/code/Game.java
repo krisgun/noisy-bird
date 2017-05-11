@@ -40,6 +40,10 @@ public class Game {
 
     public void init(Stage primaryStage) {
         view = new View();
+        canvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
+        gc = canvas.getGraphicsContext2D();
+        input = new ArrayList<String>();
+
         background = new Background(SCREEN_HEIGHT, SCREEN_WIDTH);
         ground = new Ground();
         bird = new Bird();
@@ -47,15 +51,26 @@ public class Game {
         view.createView(primaryStage);
         view.addNode(background);
         view.addNode(ground);
-
-        canvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
-
-        gc = canvas.getGraphicsContext2D();
-
         view.addNode(canvas);
 
-        input = new ArrayList<String>();
+        manageKeyEvents();
+    }
 
+    private void startGameLoop() {
+
+        gameLoop = new AnimationTimer() {
+            @Override
+            public void handle(long currentNanoTime) {
+              
+                background.scrollBackground(backgroundScrollSpeed);
+                ground.scrollGround(groundScrollSpeed);
+                bird.updateBird(gc, input);            
+            }
+        };
+        gameLoop.start();
+    }
+
+    private void manageKeyEvents() {
         view.scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -74,19 +89,5 @@ public class Game {
                 input.remove(code);
             }
         });
-    }
-
-    private void startGameLoop() {
-
-        gameLoop = new AnimationTimer() {
-            @Override
-            public void handle(long currentNanoTime) {
-              
-                background.scrollBackground(backgroundScrollSpeed);
-                ground.scrollGround(groundScrollSpeed);
-                bird.updateBird(gc, input);            
-            }
-        };
-        gameLoop.start();
     }
 }
