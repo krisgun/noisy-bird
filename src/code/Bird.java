@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 /**
- * Created by Kristoffer on 2017-05-08.
+ * Created by Kristoffer G. & Timas L. on 2017-05-08.
  */
 public class Bird {
     private Image bird;
@@ -20,18 +20,22 @@ public class Bird {
     private double gravity;
     private boolean falling;
     private double maxSpeedY;
+    private String characterImagePath =  "/assets/pictures/bird.png";
 
     public Bird() {
-        bird = new Image("/assets/pictures/bird.png", 0, 120, true,true,true);
+        bird = new Image(characterImagePath, 0, 120, true,true,true);
 
-        startingY = Game.SCREEN_HEIGHT/6;
+        startingY = Game.SCREEN_HEIGHT/2 - bird.getRequestedHeight();
         constantX = Game.SCREEN_WIDTH/4;
         currentY = startingY;
         gravity = 1;
         falling = true;
-        maxSpeedY = 15;
+        maxSpeedY = 10;
     }
 
+    /**
+     * Method for how the character falls
+     */
     public void fall() {
         if (falling) {
             speedY += gravity;
@@ -42,6 +46,9 @@ public class Bird {
         }
     }
 
+    /**
+     * Method for how the character moves up on the y-axis.
+     */
     public void jump() {
         if (!falling) {
             speedY -= gravity;
@@ -51,25 +58,35 @@ public class Bird {
             currentY -= speedY;
         }
     }
-  
-    public void updateBird(GraphicsContext gc, ArrayList input) {
+
+    /**
+     * Controls how the bird is drawn on the canvas and if it is colliding with the ground.
+     * COLLISION CHECKING IN THIS METHOD SHOULD BE WRITTEN SEPARATELY ELSEWHERE.
+     * @param gc GraphicsContext object from a canvas
+     * @param input ArrayList containing key presses
+     * @param isPlaying boolean determining whether the game is playing or paused.
+     */
+    public void updateBird(GraphicsContext gc, ArrayList input, boolean isPlaying) {
         gc.clearRect(0,0,Game.SCREEN_WIDTH,Game.SCREEN_HEIGHT);
 
-        if (input.contains("SPACE")) {
+        if(!isPlaying) {
+            currentY = startingY;
+        }
+        if (input.contains("SPACE") && currentY >= 0) {
             speedY = 0;
             falling = false;
             jump();
             gc.drawImage(bird, constantX, currentY);
         }
         else {
-            if(falling == false) {
+            if(!falling) {
                 speedY = 0;
                 falling = true;
             }
             fall();
 
-            if (currentY >= Game.SCREEN_HEIGHT*(0.66)) {
-                currentY = Game.SCREEN_HEIGHT*(0.66);
+            if (currentY >= (Game.SCREEN_HEIGHT - Ground.groundHeight) - bird.getRequestedHeight() + 3) {
+                currentY = (Game.SCREEN_HEIGHT - Ground.groundHeight - bird.getRequestedHeight() + 3);
             }
 
             gc.drawImage(bird, constantX, currentY);

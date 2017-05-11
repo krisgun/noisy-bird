@@ -3,7 +3,7 @@ package code;
 
 import javafx.scene.image.Image;
 /**
- * Created by Kristoffer on 2017-05-08.
+ * Created by Kristoffer G. & Timas L. on 2017-05-08.
  */
 public class Obstacles {
     private Image upperObstacle;
