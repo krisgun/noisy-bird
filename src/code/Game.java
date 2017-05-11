@@ -23,7 +23,7 @@ public class Game {
     private Background background;
     private Ground ground;
     private Bird bird;
-    private double backgroundScrollSpeed = 0.4;
+    private double backgroundScrollSpeed = 0.8;
     private double groundScrollSpeed = 5;
     public static double SCREEN_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
     public static double SCREEN_HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
@@ -81,25 +81,11 @@ public class Game {
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
-                gc.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
 
                 background.scrollBackground(backgroundScrollSpeed);
                 ground.scrollGround(groundScrollSpeed);
 
-                if (input.contains("SPACE")) {
-                    bird.speedY = 0;
-                    bird.falling = false;
-                    bird.jump();
-                    gc.drawImage(bird.birdImage, bird.startingX, bird.currentY);
-                }
-                else {
-                    if(bird.falling == false){
-                        bird.speedY = 0;
-                        bird.falling = true;
-                    }
-                    bird.fall();
-                    gc.drawImage(bird.birdImage, bird.startingX, bird.currentY );
-                }
+                bird.updateBird(gc, input);
             }
         };
         gameLoop.start();
