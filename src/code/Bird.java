@@ -20,9 +20,10 @@ public class Bird {
     private double gravity;
     private boolean falling;
     private double maxSpeedY;
+    private String characterImagePath =  "/assets/pictures/bird.png";
 
     public Bird() {
-        bird = new Image("/assets/pictures/bird.png", 0, 120, true,true,true);
+        bird = new Image(characterImagePath, 0, 120, true,true,true);
 
         startingY = Game.SCREEN_HEIGHT/2 - bird.getRequestedHeight();
         constantX = Game.SCREEN_WIDTH/4;

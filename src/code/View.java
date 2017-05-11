@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class View {
     private Group root; //Layer of nodes
     protected Scene scene;
+    private String readyOverlayPath = "assets/pictures/get_ready.png";
 
     public View() {
         root = new Group();
@@ -58,7 +59,7 @@ public class View {
      * @return the overlay as an ImageView object
      */
     public ImageView GameReadyOverlay() {
-        ImageView overlay = new ImageView("/assets/pictures/get_ready.png");
+        ImageView overlay = new ImageView(readyOverlayPath);
         overlay.setFitWidth(Game.SCREEN_WIDTH/4);
         overlay.setFitHeight(Game.SCREEN_HEIGHT/10);
         overlay.setLayoutX(Game.SCREEN_WIDTH/2 - overlay.getFitWidth()/2);
