@@ -81,11 +81,10 @@ public class Game {
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
-
+              
                 background.scrollBackground(backgroundScrollSpeed);
                 ground.scrollGround(groundScrollSpeed);
-
-                bird.updateBird(gc, input);
+                bird.updateBird(gc, input);            
             }
         };
         gameLoop.start();

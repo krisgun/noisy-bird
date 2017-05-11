@@ -49,4 +49,12 @@ public class Ground extends Pane {
         groundImageView.setLayoutX(x1);
         groundImageView2.setLayoutX(x2);
     }
+
+    public double getGroundHeight() {
+        return groundImageView.getFitHeight();
+    }
+
+    public double getGroundWidth() {
+        return groundImageView.getFitWidth();
+    }
 }

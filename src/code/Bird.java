@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
-
 /**
  * Created by Kristoffer on 2017-05-08.
  */
@@ -22,7 +21,7 @@ public class Bird {
     private boolean falling;
     private double maxSpeedY;
 
-    public Bird(){
+    public Bird() {
         bird = new Image("/assets/pictures/bird.png", 0, 120, true,true,true);
 
         startingY = Game.SCREEN_HEIGHT/6;
@@ -33,27 +32,27 @@ public class Bird {
         maxSpeedY = 15;
     }
 
-    public void fall(){
-        if (falling){
+    public void fall() {
+        if (falling) {
             speedY += gravity;
-            if (speedY > maxSpeedY){
+            if (speedY > maxSpeedY) {
                 speedY = maxSpeedY;
             }
             currentY += speedY;
         }
     }
 
-    public void jump(){
-        if (!falling){
+    public void jump() {
+        if (!falling) {
             speedY -= gravity;
-            if(speedY < maxSpeedY){
+            if(speedY < maxSpeedY) {
                 speedY = maxSpeedY;
             }
             currentY -= speedY;
         }
     }
-
-    public void updateBird(GraphicsContext gc, ArrayList input){
+  
+    public void updateBird(GraphicsContext gc, ArrayList input) {
         gc.clearRect(0,0,Game.SCREEN_WIDTH,Game.SCREEN_HEIGHT);
 
         if (input.contains("SPACE")) {
@@ -63,19 +62,17 @@ public class Bird {
             gc.drawImage(bird, constantX, currentY);
         }
         else {
-            if(falling == false){
+            if(falling == false) {
                 speedY = 0;
                 falling = true;
             }
             fall();
 
-            if (currentY >= Game.SCREEN_HEIGHT*(0.66)){
+            if (currentY >= Game.SCREEN_HEIGHT*(0.66)) {
                 currentY = Game.SCREEN_HEIGHT*(0.66);
             }
 
-            gc.drawImage(bird, constantX, currentY );
+            gc.drawImage(bird, constantX, currentY);
         }
-
     }
-
 }
