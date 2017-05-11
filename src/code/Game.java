@@ -5,6 +5,7 @@ import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class Game {
     private AnimationTimer gameLoop;
     private View view;
+    private ImageView overlay;
     private Background background;
     private Ground ground;
     private Bird bird;
@@ -43,6 +45,7 @@ public class Game {
         canvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
         gc = canvas.getGraphicsContext2D();
         input = new ArrayList<String>();
+        overlay = view.GameOverlay();
 
         background = new Background(SCREEN_HEIGHT, SCREEN_WIDTH);
         ground = new Ground();
@@ -57,17 +60,28 @@ public class Game {
     }
 
     private void startGameLoop() {
-
         gameLoop = new AnimationTimer() {
+            boolean isPlaying = false;
             @Override
             public void handle(long currentNanoTime) {
-              
+                if(input.contains("SPACE")) isPlaying = true;
+
                 background.scrollBackground(backgroundScrollSpeed);
                 ground.scrollGround(groundScrollSpeed);
-                bird.updateBird(gc, input);            
+                bird.updateBird(gc, input, isPlaying);
+                gameOverlay(isPlaying);
             }
         };
         gameLoop.start();
+    }
+
+    private void gameOverlay(boolean isPlaying) {
+        if(!isPlaying && !view.isExistingNode(overlay)) {
+            view.addNode(overlay);
+        }
+        else if(isPlaying && view.isExistingNode(overlay)){
+            view.removeNode(overlay);
+        }
     }
 
     private void manageKeyEvents() {

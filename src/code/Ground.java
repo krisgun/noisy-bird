@@ -20,11 +20,11 @@ public class Ground extends Pane {
         groundImageView2 = new ImageView(groundImage);
 
         groundImageView.setFitWidth(Game.SCREEN_WIDTH);
-        groundImageView.setFitHeight(Game.SCREEN_HEIGHT / 5);
+        groundImageView.setFitHeight(Game.SCREEN_HEIGHT / 7);
         groundImageView.setLayoutY(Game.SCREEN_HEIGHT - groundImageView.getFitHeight());
 
         groundImageView2.setFitWidth(Game.SCREEN_WIDTH);
-        groundImageView2.setFitHeight(Game.SCREEN_HEIGHT / 5);
+        groundImageView2.setFitHeight(Game.SCREEN_HEIGHT / 7);
         groundImageView2.setLayoutY(Game.SCREEN_HEIGHT - groundImageView.getFitHeight());
 
         groundImageView2.setLayoutX(Game.SCREEN_WIDTH);

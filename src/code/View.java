@@ -3,6 +3,9 @@ package code;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
@@ -27,6 +30,24 @@ public class View {
 
     public void addNode(Node node) {
         root.getChildren().add(node);
+    }
+
+    public void removeNode(Node node) {
+        root.getChildren().remove(node);
+    }
+
+    public boolean isExistingNode(Node node) {
+        return root.getChildren().contains(node);
+    }
+
+    public ImageView GameOverlay() {
+        ImageView overlay = new ImageView("/assets/pictures/get_ready.png");
+        overlay.setFitWidth(Game.SCREEN_WIDTH/4);
+        overlay.setFitHeight(Game.SCREEN_HEIGHT/10);
+        overlay.setLayoutX(Game.SCREEN_WIDTH/2 - overlay.getFitWidth()/2);
+        overlay.setLayoutY(Game.SCREEN_HEIGHT/4 - overlay.getFitHeight()/2);
+
+        return overlay;
     }
 
 }

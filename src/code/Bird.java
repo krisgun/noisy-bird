@@ -24,12 +24,12 @@ public class Bird {
     public Bird() {
         bird = new Image("/assets/pictures/bird.png", 0, 120, true,true,true);
 
-        startingY = Game.SCREEN_HEIGHT/6;
+        startingY = Game.SCREEN_HEIGHT/2 - bird.getRequestedHeight();
         constantX = Game.SCREEN_WIDTH/4;
         currentY = startingY;
         gravity = 1;
         falling = true;
-        maxSpeedY = 15;
+        maxSpeedY = 10;
     }
 
     public void fall() {
@@ -52,9 +52,12 @@ public class Bird {
         }
     }
   
-    public void updateBird(GraphicsContext gc, ArrayList input) {
+    public void updateBird(GraphicsContext gc, ArrayList input, boolean isPlaying) {
         gc.clearRect(0,0,Game.SCREEN_WIDTH,Game.SCREEN_HEIGHT);
 
+        if(!isPlaying) {
+            currentY = startingY;
+        }
         if (input.contains("SPACE")) {
             speedY = 0;
             falling = false;
@@ -62,7 +65,7 @@ public class Bird {
             gc.drawImage(bird, constantX, currentY);
         }
         else {
-            if(falling == false) {
+            if(!falling) {
                 speedY = 0;
                 falling = true;
             }
