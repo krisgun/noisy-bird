@@ -24,14 +24,14 @@ public class Game {
     private Background background;
     private Ground ground;
     private Bird bird;
+    private Obstacles obstacles;
     private double backgroundScrollSpeed = 0.8;
     private double groundScrollSpeed = 5;
     public static double SCREEN_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
     public static double SCREEN_HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
     private Canvas canvas;
     private GraphicsContext gc;
-    ArrayList<String> input;
-    private RotateTransition rotateTransition;
+    private ArrayList<String> input;
 
     /**
      * Method which starts the game.
@@ -57,6 +57,7 @@ public class Game {
         background = new Background(SCREEN_HEIGHT, SCREEN_WIDTH);
         ground = new Ground();
         bird = new Bird();
+        obstacles = new Obstacles();
 
         view.createView(primaryStage);
         view.addNode(background);
@@ -77,6 +78,7 @@ public class Game {
                 background.scrollBackground(backgroundScrollSpeed);
                 ground.scrollGround(groundScrollSpeed);
                 bird.updateBird(gc, input, isPlaying);
+                obstacles.updateObstacles(gc, isPlaying, groundScrollSpeed);
                 gameOverlay(isPlaying);
             }
         };

@@ -24,8 +24,8 @@ public class View {
         scene = new Scene(root, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
         primaryStage.setTitle("Noisy Bird");
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true); //Maximize window
-        //primaryStage.setResizable(false);
+        //primaryStage.setMaximized(true); //Maximize window
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
