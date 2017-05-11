@@ -72,7 +72,7 @@ public class Bird {
         if(!isPlaying) {
             currentY = startingY;
         }
-        if (input.contains("SPACE")) {
+        if (input.contains("SPACE") && currentY >= 0) {
             speedY = 0;
             falling = false;
             jump();
