@@ -71,8 +71,8 @@ public class Bird {
             }
             fall();
 
-            if (currentY >= Game.SCREEN_HEIGHT*(0.66)) {
-                currentY = Game.SCREEN_HEIGHT*(0.66);
+            if (currentY >= (Game.SCREEN_HEIGHT - Ground.groundHeight) - bird.getRequestedHeight() + 3) {
+                currentY = (Game.SCREEN_HEIGHT - Ground.groundHeight - bird.getRequestedHeight() + 3);
             }
 
             gc.drawImage(bird, constantX, currentY);

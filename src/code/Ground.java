@@ -13,6 +13,7 @@ public class Ground extends Pane {
     private ImageView groundImageView;
     private ImageView groundImageView2;
     private String groundPath = "/assets/pictures/ground_long.png";
+    public static double groundHeight = Game.SCREEN_HEIGHT/7;
 
     public Ground() {
         groundImage = new Image(groundPath);
@@ -20,11 +21,11 @@ public class Ground extends Pane {
         groundImageView2 = new ImageView(groundImage);
 
         groundImageView.setFitWidth(Game.SCREEN_WIDTH);
-        groundImageView.setFitHeight(Game.SCREEN_HEIGHT / 7);
+        groundImageView.setFitHeight(groundHeight);
         groundImageView.setLayoutY(Game.SCREEN_HEIGHT - groundImageView.getFitHeight());
 
         groundImageView2.setFitWidth(Game.SCREEN_WIDTH);
-        groundImageView2.setFitHeight(Game.SCREEN_HEIGHT / 7);
+        groundImageView2.setFitHeight(groundHeight);
         groundImageView2.setLayoutY(Game.SCREEN_HEIGHT - groundImageView.getFitHeight());
 
         groundImageView2.setLayoutX(Game.SCREEN_WIDTH);
