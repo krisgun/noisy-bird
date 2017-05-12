@@ -70,7 +70,7 @@ public class Bird {
         gc.clearRect(0,0,Game.SCREEN_WIDTH,Game.SCREEN_HEIGHT);
 
         if(!isPlaying) {
-            currentY = 100*Math.sin(3*t/1000000000)+startingY;
+            currentY = 100*Math.sin(5*t/1000000000)+startingY;
         }
         if (input.contains("SPACE") && currentY >= 0) {
             speedY = 0;
