@@ -77,7 +77,7 @@ public class Game {
 
                 background.scrollBackground(backgroundScrollSpeed);
                 ground.scrollGround(groundScrollSpeed);
-                bird.updateBird(gc, input, isPlaying);
+                bird.updateBird(gc, input, isPlaying, currentNanoTime);
                 obstacles.updateObstacles(gc, isPlaying, groundScrollSpeed);
                 gameOverlay(isPlaying);
             }

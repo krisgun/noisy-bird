@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by Kristoffer G. & Timas L. on 2017-05-08.
  */
 public class Bird {
-    private Image bird;
+    public static Image bird;
     private double constantX;
     private double startingY;
     private double currentY;
@@ -66,11 +66,11 @@ public class Bird {
      * @param input ArrayList containing key presses
      * @param isPlaying boolean determining whether the game is playing or paused.
      */
-    public void updateBird(GraphicsContext gc, ArrayList input, boolean isPlaying) {
+    public void updateBird(GraphicsContext gc, ArrayList input, boolean isPlaying, double t) {
         gc.clearRect(0,0,Game.SCREEN_WIDTH,Game.SCREEN_HEIGHT);
 
         if(!isPlaying) {
-            currentY = startingY;
+            currentY = 100*Math.sin(3*t/1000000000)+startingY;
         }
         if (input.contains("SPACE") && currentY >= 0) {
             speedY = 0;
