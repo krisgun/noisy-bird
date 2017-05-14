@@ -1,6 +1,5 @@
 package code;
 
-
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -45,10 +44,6 @@ public class Obstacles {
             currentX = startingX;
             createObstacles();
         }
-    }
-
-    public void stopUpdateObstacles(boolean isPlaying){
-
     }
 
     private void createObstacles(){
