@@ -1,6 +1,7 @@
 package code;
 
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -12,16 +13,16 @@ import java.util.Random;
 public class Obstacles {
     private Image upperObstacle;
     private Image lowerObstacle;
-    private String upperObstaclePath = "/assets/pictures/obstacle_ground.png";
-    private String lowerObstaclePath = "/assets/pictures/obstacle_roof.png";
+    private String upperObstaclePath = "/assets/pictures/obstacle_roof.png";
+    private String lowerObstaclePath = "/assets/pictures/obstacle_ground.png";
     private double upperY;
     private double lowerY;
-    private double currentX1;
-    private double currentX2;
+    private double currentX;
     private double startingX;
     private Random rand;
     private final double GAP = Bird.bird.getRequestedHeight()*2;
-
+    private Rectangle2D upperHitBox;
+    private Rectangle2D lowerHitBox;
 
     public Obstacles() {
         rand = new Random();
@@ -32,30 +33,21 @@ public class Obstacles {
 
     public void updateObstacles(GraphicsContext gc, boolean isPlaying, double obstacleSpeed) {
         if (!isPlaying) {
-            currentX1 = startingX;
-            currentX2 = startingX;
+            currentX = startingX;
         }
 
-        currentX1 -= obstacleSpeed;
-        gc.drawImage(upperObstacle, currentX1, upperY);
-        gc.drawImage(lowerObstacle,currentX1, lowerY);
+        currentX -= obstacleSpeed;
+        gc.drawImage(upperObstacle, currentX, upperY);
+        gc.drawImage(lowerObstacle,currentX, lowerY);
 
-       /* if (currentX1 <= Game.SCREEN_WIDTH/2-upperObstacle.getWidth()/2){
-            currentX2 -= obstacleSpeed;
-            gc.drawImage(upperObstacle, currentX2, upperY);
-            gc.drawImage(lowerObstacle,currentX2, lowerY);
-        }*/
 
-        if (currentX1 <= -upperObstacle.getWidth() & currentX1 <= -lowerObstacle.getWidth()){
-            currentX1 = startingX;
+        if (currentX <= -upperObstacle.getWidth() & currentX <= -lowerObstacle.getWidth()){
+            currentX = startingX;
             createObstacles();
         }
+    }
 
-       /* if (currentX2 <= -upperObstacle.getWidth()){
-            currentX2 = startingX;
-        }*/
-
-
+    public void stopUpdateObstacles(boolean isPlaying){
 
     }
 
@@ -67,6 +59,19 @@ public class Obstacles {
         upperObstacle = new Image(upperObstaclePath, 0, upperHeight, true, true, true);
         lowerObstacle = new Image(lowerObstaclePath, 0, lowerHeight, true, true, true);
         lowerY = Game.SCREEN_HEIGHT - Ground.groundHeight - lowerObstacle.getRequestedHeight() + 25;
+    }
+
+    public void updateHitBox(){
+        upperHitBox = new Rectangle2D(currentX + upperObstacle.getWidth()/4,upperY,upperObstacle.getWidth()/8,upperObstacle.getRequestedHeight());
+        lowerHitBox = new Rectangle2D(currentX + lowerObstacle.getWidth()/4,lowerY,lowerObstacle.getWidth()/8,upperObstacle.getRequestedHeight()+100);
+    }
+
+    public Rectangle2D getUpperHitBox(){
+        return upperHitBox;
+    }
+
+    public Rectangle2D getLowerHitBox(){
+        return lowerHitBox;
     }
 }
 
