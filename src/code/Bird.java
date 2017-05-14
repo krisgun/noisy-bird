@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Bird {
     public static Image bird;
-    private double constantX;
+    protected double constantX;
     private double startingY;
     private double currentY;
     private double speedY;

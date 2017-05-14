@@ -16,7 +16,7 @@ public class Obstacles {
     private String lowerObstaclePath = "/assets/pictures/obstacle_ground.png";
     private double upperY;
     private double lowerY;
-    private double currentX;
+    protected double currentX;
     private double startingX;
     private Random rand;
     private final double GAP = Bird.bird.getRequestedHeight()*2;

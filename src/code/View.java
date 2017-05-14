@@ -3,9 +3,10 @@ package code;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -14,7 +15,6 @@ import javafx.stage.Stage;
 public class View {
     private Group root; //Layer of nodes
     protected Scene scene;
-    private String readyOverlayPath = "assets/pictures/get_ready.png";
 
     public View() {
         root = new Group();
@@ -25,7 +25,7 @@ public class View {
         primaryStage.setTitle("Noisy Bird");
         primaryStage.setScene(scene);
         //primaryStage.setMaximized(true); //Maximize window
-        primaryStage.setResizable(false);
+        //primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -58,14 +58,21 @@ public class View {
      * Creates an overlay display prompting the user to start playing.
      * @return the overlay as an ImageView object
      */
-    public ImageView GameReadyOverlay() {
-        ImageView overlay = new ImageView(readyOverlayPath);
+    public ImageView gameOverlay(String overlayPath) {
+        ImageView overlay = new ImageView(overlayPath);
         overlay.setFitWidth(Game.SCREEN_WIDTH/4);
         overlay.setFitHeight(Game.SCREEN_HEIGHT/10);
         overlay.setLayoutX(Game.SCREEN_WIDTH/2 - overlay.getFitWidth()/2);
         overlay.setLayoutY(Game.SCREEN_HEIGHT/4 - overlay.getFitHeight()/2);
 
         return overlay;
+    }
+
+    public Text displayPoints() {
+        Text points = new Text(Game.SCREEN_WIDTH/2, Game.SCREEN_HEIGHT/6, "0");
+        points.setFont(new Font(72));
+        points.setFill(Color.WHITE);
+        return points;
     }
 
 }

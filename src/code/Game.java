@@ -1,12 +1,12 @@
 package code;
 
 import javafx.animation.AnimationTimer;
-import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -20,11 +20,17 @@ import java.util.ArrayList;
 public class Game {
     private AnimationTimer gameLoop;
     private View view;
-    private ImageView overlay;
+    private ImageView readyOverlay;
+    private String readyOverlayPath = "assets/pictures/get_ready.png";
+    private ImageView endOverlay;
+    private String endOverlayPath = "assets/pictures/end.png";
     private Background background;
     private Ground ground;
     private Bird bird;
     private Obstacles obstacles;
+    Text score;
+    int points = 0;
+    static boolean hasDied = false;
     private double backgroundScrollSpeed = 0.8;
     private double groundScrollSpeed = 5;
     public static double SCREEN_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
@@ -38,9 +44,9 @@ public class Game {
      * @param primaryStage Stage object JavaFX
      */
     public Game(Stage primaryStage) {
-        init(primaryStage);
-        manageKeyEvents();
-        startGameLoop();
+            init(primaryStage);
+            manageKeyEvents();
+            startGameLoop();
     }
 
     /**
@@ -52,7 +58,9 @@ public class Game {
         canvas = new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
         gc = canvas.getGraphicsContext2D();
         input = new ArrayList<String>();
-        overlay = view.GameReadyOverlay();
+        readyOverlay = view.gameOverlay(readyOverlayPath);
+        endOverlay = view.gameOverlay(endOverlayPath);
+        score = view.displayPoints();
 
         background = new Background(SCREEN_HEIGHT, SCREEN_WIDTH);
         ground = new Ground();
@@ -63,6 +71,7 @@ public class Game {
         view.addNode(background);
         view.addNode(ground);
         view.addNode(canvas);
+        view.addNode(score);
     }
 
     /**
@@ -80,29 +89,48 @@ public class Game {
                     ground.scrollGround(groundScrollSpeed);
                     bird.updateBird(gc, input, isPlaying, currentNanoTime, obstacles);
                     obstacles.updateObstacles(gc, isPlaying, groundScrollSpeed);
-                    gameOverlay(isPlaying);
+                    gameReadyOverlay(isPlaying);
+                    updatePoints(bird.constantX, obstacles.currentX);
                 }
                 else{
+                    hasDied = true;
                     gameLoop.stop();
                     bird.die(gc);
-                    obstacles.updateObstacles(gc, isPlaying, groundScrollSpeed);
+                    obstacles.updateObstacles(gc, hasDied, groundScrollSpeed);
                     view.addNode(bird.birdImage);
+                    gameEndOverlay(hasDied);
                 }
             }
         };
         gameLoop.start();
     }
 
+    private void updatePoints(double birdPosition, double obstaclePosition) {
+        if(birdPosition == obstaclePosition) {
+            points++;
+        }
+        score.setText(Integer.toString(points));
+    }
+
     /**
-     * Depending on the value of isPlaying, it will either display the intro overlay or it will remove it.
+     * Depending on the value of isPlaying, it will either display the intro readyOverlay or it will remove it.
      * @param isPlaying false before the player starts the game, true when the player is playing.
      */
-    private void gameOverlay(boolean isPlaying) {
-        if(!isPlaying && !view.isExistingNode(overlay)) {
-            view.addNode(overlay);
+    private void gameReadyOverlay(boolean isPlaying) {
+        if(!isPlaying && !view.isExistingNode(readyOverlay)) {
+            view.addNode(readyOverlay);
         }
-        else if(isPlaying && view.isExistingNode(overlay)){
-            view.removeNode(overlay);
+        else if(isPlaying && view.isExistingNode(readyOverlay)){
+            view.removeNode(readyOverlay);
+        }
+    }
+
+    private void gameEndOverlay(boolean hasDied) {
+        if(hasDied  && !view.isExistingNode(endOverlay)) {
+            view.addNode(endOverlay);
+        }
+        else if (!hasDied && view.isExistingNode(endOverlay)) {
+            view.removeNode(endOverlay);
         }
     }
 
