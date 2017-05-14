@@ -75,11 +75,19 @@ public class Game {
             public void handle(long currentNanoTime) {
                 if(input.contains("SPACE")) isPlaying = true;
 
-                background.scrollBackground(backgroundScrollSpeed);
-                ground.scrollGround(groundScrollSpeed);
-                bird.updateBird(gc, input, isPlaying);
-                obstacles.updateObstacles(gc, isPlaying, groundScrollSpeed);
-                gameOverlay(isPlaying);
+                if (!bird.isDead) {
+                    background.scrollBackground(backgroundScrollSpeed);
+                    ground.scrollGround(groundScrollSpeed);
+                    bird.updateBird(gc, input, isPlaying, currentNanoTime, obstacles);
+                    obstacles.updateObstacles(gc, isPlaying, groundScrollSpeed);
+                    gameOverlay(isPlaying);
+                }
+                else{
+                    gameLoop.stop();
+                    bird.die(gc);
+                    obstacles.updateObstacles(gc, isPlaying, groundScrollSpeed);
+                    view.addNode(bird.birdImage);
+                }
             }
         };
         gameLoop.start();
