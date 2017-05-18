@@ -5,4 +5,4 @@ A side-scrolling game in a cave setting where the goal is to dodge incoming obje
 ### How to install
 <i>Will be updated as project evolves.</i>
 ### Testing Strategy
-The testing framework used for this project will be JUnit4.
+The testing strategy for this project will be testing through visual inspection.
