@@ -12,6 +12,7 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 /**
  * Created by Kristoffer G. & Timas L. on 2017-05-08.
+ * Bird class
  */
 public class Bird {
     public static Image bird;
@@ -29,6 +30,9 @@ public class Bird {
     protected boolean isDead;
     protected ImageView birdImage;
 
+    /**
+    * Creates a new bird, initializes all the fields. Call updateHitBox.
+    */
     public Bird() {
         bird = new Image(characterImagePath, 145.0, 120, true,true,true);
         birdImage = new ImageView(bird);
@@ -64,7 +68,8 @@ public class Bird {
     }
 
     /**
-     * Method for how the character moves up on the y-axis.
+     * Method for how the character moves up on the y-axis. Gets called whenever the player hits tab
+     * @param obstacles to check collision, calls collisionLower and collisionUpper.
      */
     public void jump(Obstacles obstacles) {
         if (!falling) {
@@ -87,10 +92,10 @@ public class Bird {
 
     /**
      * Controls how the bird is drawn on the canvas and if it is colliding with the ground.
-     * COLLISION CHECKING IN THIS METHOD SHOULD BE WRITTEN SEPARATELY ELSEWHERE.
      * @param gc GraphicsContext object from a canvas
      * @param input ArrayList containing key presses
      * @param isPlaying boolean determining whether the game is playing or paused.
+     * Collision checks ceiling.
      */
     public void updateBird(GraphicsContext gc, ArrayList input, boolean isPlaying, double t, Obstacles obstacles) {
         gc.clearRect(0,0,Game.SCREEN_WIDTH,Game.SCREEN_HEIGHT);
@@ -121,10 +126,17 @@ public class Bird {
         }
     }
 
+    /**
+     * Creates a hitBox around the bird, according to its possition.
+     */
     public void updateHitBox (){
         birdHitBox = new Rectangle2D(constantX + birdWidth/3, currentY + birdHeight/3, birdWidth/3, birdHeight/3);
     }
 
+    /**
+     *  Animation for the death of the bird, Transition.
+     * @param GraphicsContext gc
+     */
     public void die(GraphicsContext gc){
         gc.clearRect(0,0,Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT);
 
@@ -146,10 +158,20 @@ public class Bird {
         parallelTransition.play();
     }
 
+    /**
+     *  Collision checks bird and upper obstacles
+     *  @return boolean, true if they collide
+     *  @param obstacle to collisioncheck
+     */
     private boolean collisionUpper (Obstacles obstacles){
         return obstacles.getUpperHitBox().intersects(birdHitBox);
     }
 
+    /**
+     *  Collision checks bird and lower obstacles
+     *  @return boolean, true if they collide
+     *  @param obstacle to collisioncheck
+     */
     private boolean collisionLower (Obstacles obstacles){
         return obstacles.getLowerHitBox().intersects(birdHitBox);
     }

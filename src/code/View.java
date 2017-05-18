@@ -1,4 +1,4 @@
-package code;
+//package code;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -68,6 +68,10 @@ public class View {
         return overlay;
     }
 
+    /**
+     * Displays points
+     * @return points
+     */
     public Text displayPoints() {
         Text points = new Text(Game.SCREEN_WIDTH/2, Game.SCREEN_HEIGHT/6, "0");
         points.setFont(new Font(72));

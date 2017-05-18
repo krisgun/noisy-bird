@@ -105,6 +105,10 @@ public class Game {
         gameLoop.start();
     }
 
+    /**
+     * Updates the points when the bird position is the same as the obstacle positions
+     * @param birdPostion, obstaclePosition
+     */
     private void updatePoints(double birdPosition, double obstaclePosition) {
         if(birdPosition == obstaclePosition) {
             points++;
@@ -125,6 +129,10 @@ public class Game {
         }
     }
 
+    /**
+     *  Displays the overlay when the player has died.
+     * @param hasDied
+     */
     private void gameEndOverlay(boolean hasDied) {
         if(hasDied  && !view.isExistingNode(endOverlay)) {
             view.addNode(endOverlay);

@@ -30,6 +30,12 @@ public class Obstacles {
         startingX = Game.SCREEN_WIDTH + upperObstacle.getWidth();
     }
 
+    /**
+     * Updates the obstacle positions and draw them
+     * @param GraphicsContext
+     * @param isPlaying
+     * @param obstacleSpeed
+     */
     public void updateObstacles(GraphicsContext gc, boolean isPlaying, double obstacleSpeed) {
         if (!isPlaying) {
             currentX = startingX;
@@ -46,6 +52,9 @@ public class Obstacles {
         }
     }
 
+    /**
+     * Creates the obstacles
+     */
     private void createObstacles(){
         double maxHeight = Game.SCREEN_HEIGHT / 2;
         double minHeight = Game.SCREEN_HEIGHT / 6;
@@ -56,17 +65,27 @@ public class Obstacles {
         lowerY = Game.SCREEN_HEIGHT - Ground.groundHeight - lowerObstacle.getRequestedHeight() + 25;
     }
 
+    /**
+     * Updates the hitBox around the obstacles, by creating new ones with appropriate positions.
+     */
     public void updateHitBox(){
         upperHitBox = new Rectangle2D(currentX + upperObstacle.getWidth()/4,upperY,upperObstacle.getWidth()/8,upperObstacle.getRequestedHeight());
         lowerHitBox = new Rectangle2D(currentX + lowerObstacle.getWidth()/4,lowerY,lowerObstacle.getWidth()/8,upperObstacle.getRequestedHeight()+100);
     }
 
+    /**
+     * Getter for upperHitBox
+     * @return upperHitBox
+     */
     public Rectangle2D getUpperHitBox(){
         return upperHitBox;
     }
 
+    /**
+     * Getter for lowerHitBox
+     * @return lowerHitBox
+     */
     public Rectangle2D getLowerHitBox(){
         return lowerHitBox;
     }
 }
-
