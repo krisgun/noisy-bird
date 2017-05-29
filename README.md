@@ -1,8 +1,11 @@
 # noisy-bird
 ### Description
-A side-scrolling game in a cave setting where the goal is to dodge incoming objects. The character is controlled by the level of input sound; meaning the more noise the player makes, the more the character moves. The library used is called JavaFX and will be used for the graphics and to capture sound Java's Sound API will be used.
+A side-scrolling game in a cave setting where the player dodges incoming speleothems. The character's vertical movement is controlled by using the spacebar. The player dies when hitting the ground or speleothems. JavaFX was used to make this project.
 
-### How to install
-<i>Will be updated as project evolves.</i>
+### How to play
+* Clone the repository  
+* Build project using the files in the folder "src"
+* Run project from Launcher.java  
+<i> Known issue: </i> The game does not reset when dying, restart game to replay.
 ### Testing Strategy
 The testing strategy for this project will be testing through visual inspection.
