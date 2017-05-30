@@ -1,6 +1,6 @@
 # noisy-bird
 ### Description
-A side-scrolling game in a cave setting where the player dodges incoming speleothems. The character's vertical movement is controlled by using the spacebar. The player dies when hitting the ground or speleothems. JavaFX was used to make this project.
+A side-scrolling game in a cave setting where the player dodges incoming randomly scaled speleothems. The character's vertical movement is controlled by using the spacebar. The player dies when hitting the ground or speleothems. The player gets a point whenever a set of obstacles is dodged. JavaFX was used to make this project.
 
 ### How to play
 * Clone the repository  
@@ -10,3 +10,14 @@ A side-scrolling game in a cave setting where the player dodges incoming speleot
 
 ### Testing Strategy
 The testing strategy for this project will be testing through visual inspection.
+
+Starting screen:
+![alt text](https://github.com/krisgun/noisy-bird/blob/master/StartingScreen.png "StartingScreen")
+
+Playing screen:
+![alt text](https://github.com/krisgun/noisy-bird/blob/master/playing.png "playing")
+
+Scaling obstacles:
+![alt text](https://github.com/krisgun/noisy-bird/blob/master/scalingObstacles.png "scalingObstacles")
+
+
