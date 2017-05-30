@@ -18,7 +18,7 @@ Scaling obstacles:
 <i> Known issue: </i> The game does not reset when dying, restart game to replay.
 
 ### Testing Strategy
-The testing strategy for this project will be testing through visual inspection.
+The testing strategy for this project will be testing through visual inspection when playing the game. 
 
 
 
